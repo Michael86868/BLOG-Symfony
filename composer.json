@@ -1,6 +1,8 @@
 {
-    "type": "project",
+    "name": "Michael86868/Blog",
+    "description": "Blog",
     "license": "proprietary",
+    "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
