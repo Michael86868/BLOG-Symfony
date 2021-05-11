@@ -21,8 +21,10 @@
         "symfony/proxy-manager-bridge": "5.2.*",
         "symfony/security-bundle": "5.2.*",
         "symfony/sendinblue-mailer": "5.2.*",
+        "symfony/stopwatch": "5.2.*",
         "symfony/twig-bundle": "5.2.*",
         "symfony/validator": "5.2.*",
+        "symfony/web-profiler-bundle": "5.2.*",
         "symfony/yaml": "5.2.*",
         "symfonycasts/verify-email-bundle": "^1.5"
     },
