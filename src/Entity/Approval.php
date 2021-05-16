@@ -33,6 +33,24 @@ class Approval
      */
     private ?\DateTimeInterface $approvedAt;
 
+    public function __construct()
+    {
+        $this->isApproved = false;
+        $this->approvedBy = null;
+    }
+
+    public function approve(UserInterface $approver): bool
+    {
+        try {
+            $this->setIsApproved(true);
+            $this->setApprovedBy($approver);
+            $this->setApprovedAt(new \DateTimeImmutable());
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+        return true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

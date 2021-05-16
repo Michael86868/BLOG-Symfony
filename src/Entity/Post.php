@@ -48,6 +48,11 @@ class Post
      */
     private Approval $Approval;
 
+    public function __construct()
+    {
+        $this->Approval = new Approval();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -118,7 +123,7 @@ class Post
         return $this->Approval;
     }
 
-    public function setApproval(?Approval $Approval): self
+    public function setApproval(Approval $Approval): self
     {
         $this->Approval = $Approval;
 
