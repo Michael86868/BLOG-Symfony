@@ -63,4 +63,20 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param $maxResults
+     * @return array<Post>|null
+     */
+    public function findApproved($maxResults): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.Approval', 'a')
+            ->andWhere('a.isApproved = :val')
+            ->setParameter('val', true)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
+    }
 }
