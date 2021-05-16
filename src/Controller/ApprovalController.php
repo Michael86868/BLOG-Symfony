@@ -25,9 +25,9 @@ class ApprovalController extends AbstractController
     }
 
     /**
-     * @Route("/approve_view/{post}", name="approval_view_post")
+     * @Route("/approval/{post}", name="approval_view_post")
      */
-    public function approve_view(Post $post)
+    public function approval(Post $post)
     {
         return $this->render('approval/approval.html.twig', [
             'post' => $post
