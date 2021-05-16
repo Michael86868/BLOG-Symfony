@@ -77,9 +77,15 @@ class User implements UserInterface
      */
     private Collection $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Approval::class, mappedBy="approvedBy")
+     */
+    private Collection $approvals;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->approvals = new ArrayCollection();
     }
 
     public function __toString()
@@ -265,6 +271,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($post->getAuthor() === $this) {
                 $post->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Approval[]
+     */
+    public function getApprovals(): Collection
+    {
+        return $this->approvals;
+    }
+
+    public function addApproval(Approval $approval): self
+    {
+        if (!$this->approvals->contains($approval)) {
+            $this->approvals[] = $approval;
+            $approval->setApprovedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApproval(Approval $approval): self
+    {
+        if ($this->approvals->removeElement($approval)) {
+            // set the owning side to null (unless already changed)
+            if ($approval->getApprovedBy() === $this) {
+                $approval->setApprovedBy(null);
             }
         }
 

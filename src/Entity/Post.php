@@ -43,6 +43,11 @@ class Post
      */
     private User $author;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Approval::class, cascade={"persist", "remove"})
+     */
+    private Approval $Approval;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Post
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getApproval(): ?Approval
+    {
+        return $this->Approval;
+    }
+
+    public function setApproval(?Approval $Approval): self
+    {
+        $this->Approval = $Approval;
 
         return $this;
     }
