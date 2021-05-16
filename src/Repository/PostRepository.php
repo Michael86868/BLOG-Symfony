@@ -47,4 +47,20 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param $maxResults
+     * @return array<Post>|null
+     */
+    public function findNonApproved($maxResults): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.Approval', 'a')
+            ->andWhere('a.isApproved = :val')
+            ->setParameter('val', false)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult();
+    }
 }
