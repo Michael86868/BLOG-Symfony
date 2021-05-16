@@ -16,7 +16,6 @@ class PostType extends AbstractType
             ->add('content')
             ->add('tags')
             ->add('updatedAt')
-            ->add('author')
         ;
     }
 

@@ -41,7 +41,7 @@ class Post
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
+    private User $author;
 
     public function getId(): ?int
     {

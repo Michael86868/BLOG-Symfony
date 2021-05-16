@@ -82,13 +82,17 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
