@@ -7,11 +7,32 @@
 
         <link rel="stylesheet" href="{{ asset('bootstrap/scss/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('fonts/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bootstrap/custom/navbar.css') }}">
 
     {% endblock %}
     <title>{% block title %}Blog{% endblock %}</title>
 </head>
 <body>
+<header class="p-3 bg-navbar text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{{ path('app_homepage') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" height="40">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{{ path('post_index') }}" class="nav-link px-3 text-dark fw-bolder" style="font-size: 1.2rem;">ČLÁNKY</a></li>
+                <li><a href="{{ path('user_index') }}" class="nav-link px-3 text-dark fw-bolder" style="font-size: 1.2rem;">UŽIVATELÉ</a></li>
+                <li><a href="{{ path('approval') }}" class="nav-link px-3 text-dark fw-bolder" style="font-size: 1.2rem;">ADMINISTRACE</a></li>
+            </ul>
+
+            <div class="text-end">
+                <li><a href="#" class="nav-link px-3 text-dark fw-bolder" style="font-size: 1.2rem;">Přihlásit se</a></li>
+                <li><a href="#" class="nav-link px-3 text-dark fw-bolder" style="font-size: 1.2rem;">Registrovat se</a></li>
+            </div>
+        </div>
+    </div>
+</header>
 {% block body %}{% endblock %}
 
 {% block javascripts %}
