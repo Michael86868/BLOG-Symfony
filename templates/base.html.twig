@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+
+        <link rel="stylesheet" href="{{ asset('bootstrap/scss/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('fonts/font-awesome.min.css') }}">
+
+    {% endblock %}
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+<body>
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>
+
