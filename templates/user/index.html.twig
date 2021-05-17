@@ -1,53 +1,63 @@
-<!DOCTYPE html>
+{% extends 'base.html.twig' %}
 
-<title>User index</title>
+{% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <section class="users container mt-5">
+        <div class="row">
+            <div class="col-xl-12">
+                <h1 class="text-center">Uživatelé</h1>
+            </div>
+            <div class="col-xl-12 mx-auto overflow-auto">
+                <table class="table px-5 mt-5" id="users-show">
+                    <thead>
+                    <tr>
+                        <th><span>User</span></th>
+                        <th><span>Created</span></th>
+                        {#  <th>Password</th> #}
+                        <th><span>Email</span></th>
+                        <th><span>Industry</span></th>
+                        <th><span>Actions</span></th>
+                    </tr>
+                    </thead>
+                    {% for user in users %}
+                        <tr>
+                            <td class="p-3">
+                                <img width="50" class="float-start me-3" height="50" src="{{ asset('images/avatars/av.jpg') }}" alt="{{ user.username }}">
+                                <span class="d-block mt-1 fw-bolder">{{ user.username }}</span>
+                                <span class="d-block">
+                                    {% for role in user.roles %}
+                                        {% if role == 'ROLE_ADMIN' %}
+                                            <span class="bg-danger p-1 rounded text-light fw-bolder">Admin</span>
+                                        {% else %}
+                                            <span class="bg-secondary p-1 rounded text-light fw-bolder">Hráč</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </td>
+                            <td class="p-3">{{ user.createdAt|date("d/m/Y") }}</td>
+                            {#   <td>{{ user.password }}</td> #}
+                            <td class="p-3"> {{ user.email }}</td>
+                            <td class="p-3"> {{ user.industry }}</td>
+                            <td class="p-3">
+                                <div class="d-flex align-items-center" style="column-gap: 10px;">
+                                    <a href="{{ path('user_show', {'id': user.id}) }}"><span class='text-success fa fa-eye icon'></span></a>
+                                    <a href="{{ path('user_edit', {'id': user.id}) }}"><span class='text-primary fa fa-edit icon'></span></a>
+                                    {{ include('user/_delete_form.html.twig') }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Nebyly nalezeny žádné záznamy</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-xl-12 text-center">
+            <a style="padding: 10px 20px;" class="btn btn-primary" href="{{ path('user_new') }}">Create new</a>
+        </div>
+    </section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Birthdate</th>
-                <th>Gender</th>
-                <th>Industry</th>
-                <th>Password</th>
-                <th>Roles</th>
-                <th>IsVerified</th>
-                <th>City</th>
-                <th>Bio</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
-                <td>{{ user.gender }}</td>
-                <td>{{ user.industry }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.city }}</td>
-                <td>{{ user.bio }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}
