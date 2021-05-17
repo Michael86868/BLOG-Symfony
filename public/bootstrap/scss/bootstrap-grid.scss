@@ -10,13 +10,13 @@ $include-column-box-sizing: true !default;
 @import "functions";
 @import "variables";
 
-@import "scss/mixins/lists";
-@import "scss/mixins/breakpoints";
-@import "scss/mixins/container";
-@import "scss/mixins/grid";
-@import "scss/mixins/utilities";
+@import "mixins/lists";
+@import "mixins/breakpoints";
+@import "mixins/container";
+@import "mixins/grid";
+@import "mixins/utilities";
 
-@import "scss/vendor/rfs";
+@import "vendor/rfs";
 
 @import "containers";
 @import "grid";
@@ -62,4 +62,4 @@ $utilities: map-get-multiple(
   )
 );
 
-@import "scss/utilities/api";
+@import "utilities/api";

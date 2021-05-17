@@ -139,6 +139,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/asset": {
+        "version": "v5.2.7"
+    },
     "symfony/cache": {
         "version": "v5.2.8"
     },
