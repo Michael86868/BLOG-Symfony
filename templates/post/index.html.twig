@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <section class="container mt-5">
+        <div class="row">
+            <div class="col-xl-12">
+                <h1 class="text-center">Příspěvky</h1>
+            </div>
+            <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-5 mb-0 px-6 filter-tags">
+                <div class="col bg-danger">
+                    <span>FILTER BY<span class="ms-2 fa fa-tag"></span></span>
+                </div>
+                <label class="col tag px-0 ms-2">
+                    <input type="checkbox" class="d-none">
+                    <span class="btn px-2 py-0 align-baseline">HTML</span>
+                </label>
+                <label class="col tag px-0 ms-2">
+                    <input type="checkbox" class="d-none">
+                    <span class="btn px-2 py-0 align-baseline">JS</span>
+                </label>
+                <label class="col tag px-0 ms-2">
+                    <input type="checkbox" class="d-none">
+                    <span class="btn px-2 py-0 align-baseline">CSS</span>
+                </label>
+                <label class="col tag px-0 ms-2">
+                    <input type="checkbox" class="d-none">
+                    <span class="btn px-2 py-0 align-baseline">PHP</span>
+                </label>
+            </div>
+            <div class="row row-cols-1 row-cols-lg-3 g-4 px-6">
+                {% for post in posts %}
+                <div class="col">
+                    <div class="card h-100 shadow">
+                        <div class="card-img position-relative">
+                            {{ include('post/_delete_form.html.twig') }}
+                            <a class="position-absolute ms-5" href="{{ path('post_edit', {'id': post.id}) }}"><span class="fa fa-edit text-primary"></span></a>
+                            <div class="position-absolute bottom-0 end-0 mb-2 me-2 card-tag">PHP</div>
+                            <img src="{{ asset('images/blog.jpg') }}" class="card-img-top" alt="post-image">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Moje první zkušenosti s programováním v C</h5>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-author d-inline ms-2">Michael</p>
+                                <p class="card-date d-inline ms-2">24.5.2021</p>
+                                <p class="card-views d-inline ms-2">500</p>
+                            </div>
+                            <p class="card-text">Moje první pokusy s programován v programovacím jazyce C sahají někde do roku 2019, kdy jsem se rozhodl s programovacím jazykem začít a naučit se základní syntaxi.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="text-decoration-none card-link" href="{{ path('post_show', {'id': post.id}) }}">Přečti si více</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+            </div>
+            <div class="col-xl-12 text-center mt-5">
+                <p class="h4 text-danger">Zatím nejsou uveřejněny žádné příspěvky</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="{{ path('post_new') }}">Create new</a>
+        </div>
+    </section>
+{% endblock %}
