@@ -16,14 +16,14 @@
 <header class="p-3 mb-3 border-bottom bg-navbar">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <a href="{{ path('app_homepage') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
                 <img src="{{ asset('images/logo.png') }}" alt="" height="40">
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-3 link-dark fw-bolder">ČLÁNKY</a></li>
-                <li><a href="#" class="nav-link px-3 link-dark fw-bolder">PŘÍSPĚVKY</a></li>
-                <li><a href="#" class="nav-link px-3 link-dark fw-bolder">ADMINISTRACE</a></li>
+                <li><a href="{{ path('post_index') }}" class="nav-link px-3 link-dark fw-bolder">články</a></li>
+                <li><a href="{{ path('user_index') }}" class="nav-link px-3 link-dark fw-bolder">uživatelé</a></li>
+                <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bolder">administrace</a></li>
             </ul>
             <ul class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 justify-content-center nav">
                 {% if is_granted('ROLE_USER') %}
@@ -31,8 +31,8 @@
                     <li><img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="40" class="rounded-circle"></li>
                     <li><a href="{{ path('app_logout') }}" class="px-1 link-dark fw-bolder btn btn-dark text-light ms-3 mt-1">Odhlásit se</a></li>
                 {% else %}
-                    <li><a href="#" class="nav-link px-3 link-dark fw-bolder">Přihlásit se</a></li>
-                    <li><a href="#" class="nav-link px-3 link-dark fw-bolder">Registrovat se</a></li>
+                    <li><a href="{{ path('app_login') }}" class="nav-link px-3 link-dark fw-bolder">Přihlásit se</a></li>
+                    <li><a href="{{ path('app_register') }}" class="nav-link px-3 link-dark fw-bolder">Registrovat se</a></li>
                 {% endif %}
             </ul>
         </div>
