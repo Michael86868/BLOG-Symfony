@@ -113,10 +113,8 @@
   border-collapse: separate;
   border-spacing: 0;
 }
-.users > .row > div > #users-show > thead > tr, .users > .row > div > #users-show tbody > tr {
-  text-align: left;
-}
 .users > .row > div > #users-show > thead > tr {
+  text-align: left;
   border-bottom: 1px solid gray;
 }
 .users > .row > div > #users-show > thead > tr > th {
@@ -126,6 +124,9 @@
   padding-bottom: 10px;
   border-bottom: 2px solid black;
 }
+.users > .row > div > #users-show tbody > tr {
+  text-align: left;
+}
 .users > .row > div > #users-show > tbody > tr > td {
   font-size: 0.875em;
   background: #f5f5f5;
@@ -134,7 +135,7 @@
   padding: 12px 8px;
 }
 
-.form-control, .form-control,.form-control:focus{
+.form-control {
   background-color: inherit;
   outline: none;
   box-shadow: none;
@@ -142,21 +143,27 @@
   border: none;
   display: inline;
   height: 45px;
+  border-bottom: 1px solid #1e1e1e;
 }
-.form-control{
-  border-bottom: 1px solid rgba(30,30,30,1);
-}
-.form-control:focus{
+.form-control:focus {
+  background-color: inherit;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  display: inline;
+  height: 45px;
   border-bottom: 1px solid seagreen;
 }
-.input-group-text{
+
+.input-group-text {
   background: transparent;
   border: none;
 }
+
 .inner-addon {
   position: relative;
 }
-
 .inner-addon .fa {
   color: #a3a198;
   position: absolute;
@@ -165,50 +172,62 @@
 }
 
 .left-addon .fa {
-  left:  0;
+  left: 0;
 }
+.left-addon > input:not([type=checkbox]) {
+  padding-left: 45px;
+}
+.left-addon > input[type=checkbox] {
+  margin-right: 0;
+}
+
 .right-addon .fa {
   right: 0;
 }
-
-.left-addon > input:not([type='checkbox']){
-  padding-left:  45px;
-}
-.left-addon > input[type='checkbox']{
-  margin-right:  0;
-}
-
 .right-addon input {
   padding-right: 45px;
 }
 
 select option {
-  background: rgba(0, 0, 0, 1);
+  background: black;
 }
-.form-select{
+
+.form-select {
   color: #8e8e8e;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   padding-left: 45px;
 }
-option
-{
+
+option {
   position: relative;
   padding-left: 5px;
 }
-.checkbox-label{
+
+.checkbox-label {
   margin-left: 12px;
 }
-.form-control-checkbox{
+
+.form-control-checkbox {
   margin-left: 12px;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active  {
+
+input:-webkit-autofill {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: black !important;
+}
+input:-webkit-autofill:hover {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: black !important;
+}
+input:-webkit-autofill:focus {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: black !important;
+}
+input:-webkit-autofill:active {
   transition: background-color 5000s;
   -webkit-text-fill-color: black !important;
 }
 
-/*# sourceMappingURL=navbar.css.map */
+/*# sourceMappingURL=main.css.map */
