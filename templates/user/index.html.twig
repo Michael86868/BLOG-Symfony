@@ -42,8 +42,10 @@
                             <td class="p-3">
                                 <div class="d-flex align-items-center" style="column-gap: 10px;">
                                     <a href="{{ path('user_show', {'id': user.id}) }}"><span class='text-success fa fa-eye icon'></span></a>
-                                    <a href="{{ path('user_edit', {'id': user.id}) }}"><span class='text-primary fa fa-edit icon'></span></a>
-                                    {{ include('user/_delete_form.html.twig') }}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{ path('user_edit', {'id': user.id}) }}"><span class='text-primary fa fa-edit icon'></span></a>
+                                        {{ include('user/_delete_form.html.twig') }}
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
