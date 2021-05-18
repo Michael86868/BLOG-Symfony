@@ -9,7 +9,7 @@
     {% endfor %}
 
 
-    <section class="container mt-5">
+    <section class="container mt-5 register">
         <div class="row">
             <div class="col-xl-12">
                 <h1 class="text-center">Registrovat se</h1>
@@ -17,7 +17,6 @@
             <div class="col-xl-6 mx-auto">
                 <form method="post">
                     <div class="form-group">
-
                         <div class="inner-addon left-addon mt-5">
                             {{ form_label(registrationForm.username, ' ', { 'label_attr': {'class': 'fa fa-user'} }) }}
                             {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'Username'}}) }}

@@ -155,16 +155,8 @@
     }
   }
 }
-.form-control {
-  background-color: inherit;
-  outline: none;
-  box-shadow: none;
-  border-radius: 0;
-  border: none;
-  display: inline;
-  height: 45px;
-  border-bottom: 1px solid rgba(30,30,30,1);
-  &:focus {
+.login, .register{
+  .form-control {
     background-color: inherit;
     outline: none;
     box-shadow: none;
@@ -172,9 +164,20 @@
     border: none;
     display: inline;
     height: 45px;
-    border-bottom: 1px solid seagreen;
+    border-bottom: 1px solid rgba(30,30,30,1);
+    &:focus {
+      background-color: inherit;
+      outline: none;
+      box-shadow: none;
+      border-radius: 0;
+      border: none;
+      display: inline;
+      height: 45px;
+      border-bottom: 1px solid seagreen;
+    }
   }
 }
+
 .input-group-text {
   background: transparent;
   border: none;
@@ -211,7 +214,7 @@
 }
 select {
   option {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(255, 255, 255, 1);
   }
 }
 .form-select {

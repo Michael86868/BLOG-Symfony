@@ -135,7 +135,7 @@
   padding: 12px 8px;
 }
 
-.form-control {
+.login .form-control, .register .form-control {
   background-color: inherit;
   outline: none;
   box-shadow: none;
@@ -145,7 +145,7 @@
   height: 45px;
   border-bottom: 1px solid #1e1e1e;
 }
-.form-control:focus {
+.login .form-control:focus, .register .form-control:focus {
   background-color: inherit;
   outline: none;
   box-shadow: none;
@@ -189,7 +189,7 @@
 }
 
 select option {
-  background: black;
+  background: white;
 }
 
 .form-select {
