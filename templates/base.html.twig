@@ -26,7 +26,7 @@
                 <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bolder">administrace</a></li>
             </ul>
             <ul class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 justify-content-center nav">
-                {% if is_granted('ROLE_USER') %}
+                {% if app.user %}
                     <li><span class="nav-link px-3 link-dark fw-bolder pt-1">{{ app.user.username }}</span></li>
                     <li><img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="35" class="rounded-circle"></li>
                     <li><a href="{{ path('app_logout') }}" class="px-1 link-dark fw-bolder btn btn-dark text-light ms-4">Odhlásit se</a></li>
