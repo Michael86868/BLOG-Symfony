@@ -35,7 +35,7 @@ class Post
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
@@ -50,6 +50,7 @@ class Post
 
     public function __construct()
     {
+        $this->setCreatedAt(new \DateTimeImmutable);
         $this->Approval = new Approval();
     }
 
@@ -94,24 +95,24 @@ class Post
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): User
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(User $author): self
     {
         $this->author = $author;
 
