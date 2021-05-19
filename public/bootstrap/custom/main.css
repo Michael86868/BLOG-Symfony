@@ -253,4 +253,11 @@ section {
   padding-bottom: 50px;
 }
 
+section.approval table > tbody > tr:nth-child(even) {
+  background-color: var(--bg-secondary);
+}
+section.approval table > thead {
+  background-color: var(--bg-secondary);
+}
+
 /*# sourceMappingURL=main.css.map */

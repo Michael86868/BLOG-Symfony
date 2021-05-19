@@ -274,3 +274,15 @@ input {
 section{
   padding-bottom: 50px;
 }
+section.approval{
+  table{
+    >tbody{
+      >tr:nth-child(even){
+        background-color: var(--bg-secondary);
+      }
+    }
+    >thead{
+      background-color: var(--bg-secondary);
+    }
+  }
+}
