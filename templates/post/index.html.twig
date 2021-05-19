@@ -46,7 +46,7 @@
                                 <p class="card-date d-inline ms-2">{{ post.createdAt|date("d/m/Y") }}</p>
                                 <!--<p class="card-views d-inline ms-2">500</p>-->
                             </div>
-                            <p class="card-text">{{ post.content }}</p>
+                            <p class="card-text">{{ post.content|striptags }}</p>
                         </div>
                         <div class="card-footer">
                             <a class="text-decoration-none card-link" href="{{ path('post_show', {'id': post.id}) }}">Přečti si více</a>
