@@ -17,15 +17,15 @@
             </tr>
             <tr>
                 <th>Content</th>
-                <td>{{ post.content }}</td>
+                <td>{{ post.content|raw }}</td>
             </tr>
             <tr>
                 <th>Tags</th>
                 <td>{{ post.tags ? post.tags|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
-                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>createdAt</th>
+                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
