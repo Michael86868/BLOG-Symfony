@@ -83,9 +83,11 @@ class Post
         return $this;
     }
 
-    public function getTags(): ?array
+    public function getTags(): array
     {
-        return $this->tags;
+        $tags = $this->tags;
+
+        return array_unique($tags);
     }
 
     public function setTags(?array $tags): self

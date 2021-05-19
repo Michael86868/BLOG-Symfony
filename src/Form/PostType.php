@@ -6,6 +6,7 @@ use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +18,17 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('tags', TextType::class)
+            ->add('content', TextareaType::class, [
+                'required' => false,
+            ])
+            ->add('tags',ChoiceType::class,[
+                'multiple'=>true,
+                'expanded'=>true,
+                'choices'=>[
+                    'PHP'=>'PHP',
+                    'CSS'=>'CSS'
+                ]
+            ])
         ;
     }
 
