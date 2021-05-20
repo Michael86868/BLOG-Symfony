@@ -15,32 +15,29 @@
                 <h1 class="text-center">Registrovat se</h1>
             </div>
             <div class="col-xl-6 mx-auto">
-                <form method="post">
-                    <div class="form-group">
-                        <div class="inner-addon left-addon mt-5">
-                            {{ form_label(registrationForm.username, ' ', { 'label_attr': {'class': 'fa fa-user'} }) }}
-                            {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'Username'}}) }}
-                        </div>
-                        <div class="inner-addon left-addon mt-4">
-                            {{ form_label(registrationForm.email, ' ', { 'label_attr': {'class': 'fa fa-envelope'} }) }}
-                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'E-mail'}}) }}
-                        </div>
-                        <div class="inner-addon left-addon mt-4">
-                            {{ form_label(registrationForm.plainPassword, ' ', { 'label_attr': {'class': 'fa fa-lock'} }) }}
-                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
-                        </div>
-                        <div class="inner-addon left-addon mt-4">
-                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input form-control-checkbox'}}) }}
-                            {{ form_label(registrationForm.agreeTerms, 'Agree terms', { 'label_attr': {'class': 'checkbox-label text-muted'} } ) }}
-                        </div>
-                        <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}"
-                        >
+                {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    <div class="inner-addon left-addon mt-5">
+                        {{ form_label(registrationForm.username, ' ', { 'label_attr': {'class': 'fa fa-user'} }) }}
+                        {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control', 'autofocus': 'true','placeholder': 'Username'}}) }}
                     </div>
-                    <div class="text-center mt-5">
-                        <button style="padding: 10px 20px;" class="btn btn-dark font-weight-bold" type="submit">Registrovat se</button>
+                    <div class="inner-addon left-addon mt-4">
+                        {{ form_label(registrationForm.email, ' ', { 'label_attr': {'class': 'fa fa-envelope'} }) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'E-mail'}}) }}
                     </div>
-                </form>
+                    <div class="inner-addon left-addon mt-4">
+                        {{ form_label(registrationForm.plainPassword, ' ', { 'label_attr': {'class': 'fa fa-lock'} }) }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                    </div>
+                    <div class="inner-addon left-addon mt-4">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input form-control-checkbox'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, 'Agree terms', { 'label_attr': {'class': 'checkbox-label text-muted'} } ) }}
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <button style="padding: 10px 20px;" class="btn btn-dark font-weight-bold" type="submit">Registrovat se</button>
+                </div>
+                {{ form_end(registrationForm) }}
             </div>
         </div>
     </section>
