@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -25,20 +27,28 @@ class ApprovalController extends AbstractController
     }
 
     /**
-     * @Route("/approval/{post}", name="approval_view_post")
+     * @Route("/approval/{post}", name="approval_view_post", methods={"GET","POST"})
      */
-    public function approval(Post $post)
+    public function approval(Request $request, Post $post): Response
     {
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('approval/approval.html.twig', [
-            'post' => $post
+            'post' => $post,
+            'form' => $form->createView(),
         ]);
     }
 
 
     /**
-     * @Route("/approve/{post}", name="approval_post")
+     * @Route("/approve/{post}", name="approval_post", methods={"GET"})
      * @param Post $post
-     * @return Response
+     * @return RedirectResponse
      */
     public function approve(Post $post): RedirectResponse
     {
