@@ -1,4 +1,39 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<table class="table table-borderless user-table-new">
+    <tr>
+        <td>{{ form_label(form.username, 'Jméno', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.username, {'attr': {'class': 'form-control','placeholder': 'Username'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.email, 'Email', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder': 'Email'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.birthdate, 'Datum narození', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.birthdate, {'attr': {'class': 'form-control','placeholder': 'Birthdate'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.gender, 'Pohlaví', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.gender, {'attr': {'class': 'form-control','placeholder': 'Gender'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.industry, 'Zaměření', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.industry, {'attr': {'class': 'form-control','placeholder': 'Industry'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.password, 'Heslo', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.password, {'attr': {'class': 'form-control','placeholder': 'Password'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.city, 'Město', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.city, {'attr': {'class': 'form-control','placeholder': 'City'}}) }}</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.bio, 'Něco o uživateli', {'label_attr': {'class': 'text-muted mt-1 h7', 'style': 'font-family: "Trebuchet MS", sans-serif;'} }) }}</td>
+        <td>{{ form_widget(form.bio, {'attr': {'class': 'form-control','placeholder': 'Biography'}}) }}</td>
+    </tr>
+    <tr class="text-center">
+        <td colspan="2" class="pt-4"><button class="btn btn-success px-3">{{ button_label|default('Uložit') }}</button></td>
+    </tr>
+</table>
 {{ form_end(form) }}

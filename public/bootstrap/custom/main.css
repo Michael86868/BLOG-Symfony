@@ -10,6 +10,14 @@
   --bg-secondary: #e5e5e5;
 }
 
+.h7 {
+  font-size: 1.2rem;
+}
+
+.font-verdana {
+  font-family: "Verdana", sans-serif;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-color);
@@ -258,6 +266,15 @@ section.approval table > tbody > tr:nth-child(even) {
 }
 section.approval table > thead {
   background-color: var(--bg-secondary);
+}
+
+.user-table-new > tbody > tr > td:nth-child(1):not(:last-child) {
+  text-align: right;
+  padding-right: 3%;
+}
+.user-table-new > tbody > tr > td:nth-child(1):not(:last-child):after {
+  content: ":";
+  color: var(--text-muted-color);
 }
 
 /*# sourceMappingURL=main.css.map */

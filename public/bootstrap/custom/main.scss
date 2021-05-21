@@ -8,6 +8,9 @@
   --text-muted-color: #6c757d;
   --bg-secondary: #e5e5e5;
 }
+.h7{
+  font-size: 1.2rem;
+}
 .font-verdana{
   font-family: 'Verdana', sans-serif;
 }
@@ -286,6 +289,20 @@ section.approval{
     }
     >thead{
       background-color: var(--bg-secondary);
+    }
+  }
+}
+.user-table-new {
+  >tbody{
+    >tr {
+      >td:nth-child(1):not(:last-child) {
+        text-align: right;
+        padding-right: 3%;
+        &:after{
+          content: ':';
+          color: var(--text-muted-color);
+        }
+      }
     }
   }
 }

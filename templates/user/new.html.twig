@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-
-<title>New User</title>
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Create new User</h1>
-
-    {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('user_index') }}">back to list</a>
+    <section class="container mt-5 bg-white">
+        <div class="row">
+            <div class="col-xl-12 my-5">
+                <h1 class="text-center">Přidání uživatele</h1>
+            </div>
+            <div class="col-6 d-block mx-auto">
+                {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </section>
 {% endblock %}
