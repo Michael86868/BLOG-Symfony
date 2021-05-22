@@ -24,7 +24,9 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{{ path('post_index') }}" class="nav-link px-3 link-dark fw-bolder">články</a></li>
                 <li><a href="{{ path('user_index') }}" class="nav-link px-3 link-dark fw-bolder">uživatelé</a></li>
-                <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bolder">administrace</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bolder">administrace</a></li>
+                {% endif %}
             </ul>
             <ul class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 justify-content-center nav">
                 {% if app.user %}
