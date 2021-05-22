@@ -28,7 +28,10 @@
                                         <td class="p-3 px-5 fw-bolder">{{ post.author.username }}</td>
                                         <td class="p-3 px-5 fw-bolder">{{ post.createdAt|date("d/m/Y") }}</td>
                                         <td class="p-3 px-5 fw-bolder">{% for tag in post.tags %} {{ tag }}{% endfor %}</td>
-                                        <td class="p-3 px-5 fw-bolder"><a class="btn btn-success" href="{{ path('approval_post', {'post': post.id}) }}">Schválit</a></td>
+                                        <td class="p-3 px-5 fw-bolder">
+                                            <a class="btn btn-primary" href="{{ path('approval_view_post', {'post': post.id}) }}">Zobrazit</a>
+                                            <a class="btn btn-success" href="{{ path('approval_post', {'post': post.id}) }}">Schválit</a>
+                                        </td>
                                     </tr>
                                 {% else %}
                                     <tr class="text-center">
