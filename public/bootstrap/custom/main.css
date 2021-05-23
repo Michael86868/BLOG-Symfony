@@ -277,4 +277,9 @@ section.approval table > thead {
   color: var(--text-muted-color);
 }
 
+.dropdown-item:hover {
+  background: var(--bg-navbar);
+  color: #000;
+}
+
 /*# sourceMappingURL=main.css.map */
