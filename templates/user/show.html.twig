@@ -1,62 +1,88 @@
-<!DOCTYPE html>
-
-<title>User</title>
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Birthdate</th>
-                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ user.gender }}</td>
-            </tr>
-            <tr>
-                <th>Industry</th>
-                <td>{{ user.industry }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsVerified</th>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ user.city }}</td>
-            </tr>
-            <tr>
-                <th>Bio</th>
-                <td>{{ user.bio }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    <section class="users container mt-5 col-6 pt-5">
+        <div class="row">
+            <div class="col-4 mx-auto overflow-auto">
+                <div class="card">
+                    <div class="card-body w-75 d-block mx-auto">
+                        <div class="img overflow-hidden rounded-circle">
+                            <img src="{{ asset('images/avatars/av.jpg') }}" class="img-fluid p-1" alt="avatar">
+                        </div>
+                        <div class="mt-4">
+                            <p class="h4 text-center text-dark fw-bolder">{{ user.username }}</p>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-center h6">{{ user.industry }}</p>
+                        </div>
+                        <div class="mt-2 mb-4">
+                            <p class="text-center h6">{{ user.city }}, Czech Republic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 mx-auto overflow-auto">
+                <div class="card">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless h7">
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Přezdívka</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.username }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Zaměření</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.industry }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Email</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.email }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Datum narození</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.birthdate ? user.birthdate|date('d.m.Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bolder py-3">Adresa</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.city }}, Czech Republic</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless">
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/web.png') }}" height="20" class="me-2">Stránky</td>
+                                <td class="text-muted font-verdana py-3">Činel page</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/github.png') }}" height="24" class="me-2">Github</td>
+                                <td class="text-muted font-verdana py-3">Michael86868</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/facebook.png') }}" height="24" class="me-2">Facebook</td>
+                                <td class="text-muted font-verdana py-3">michael.k86</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/twitter.png') }}" height="24" class="me-2">Twitter</td>
+                                <td class="text-muted font-verdana py-3">Michael</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless h7">
+                            <tr>
+                                <td class="fw-bolder py-3" colspan="2">Něco o uživateli</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted font-verdana h8 py-3">{{ user.bio }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

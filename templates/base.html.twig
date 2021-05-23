@@ -7,11 +7,40 @@
 
         <link rel="stylesheet" href="{{ asset('bootstrap/scss/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('fonts/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bootstrap/custom/main.css') }}">
+        <script src="https://cdn.tiny.cloud/1/q3b4c9zmkj2omouzz5sqjjxl51w7ofrbuhnxx6rwusf5q3f5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     {% endblock %}
     <title>{% block title %}Blog{% endblock %}</title>
 </head>
 <body>
+<header class="p-3 mb-3 border-bottom bg-navbar">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{{ path('app_homepage') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img src="{{ asset('images/logo.png') }}" alt="" height="40">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{{ path('post_index') }}" class="nav-link px-3 link-dark fw-bolder">články</a></li>
+                <li><a href="{{ path('user_index') }}" class="nav-link px-3 link-dark fw-bolder">uživatelé</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bolder">administrace</a></li>
+                {% endif %}
+            </ul>
+            <ul class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 justify-content-center nav">
+                {% if app.user %}
+                    <li><span class="nav-link px-3 link-dark fw-bolder pt-1">{{ app.user.username }}</span></li>
+                    <li><img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="35" class="rounded-circle"></li>
+                    <li><a href="{{ path('app_logout') }}" class="px-1 link-dark fw-bolder btn btn-dark text-light ms-4">Odhlásit se</a></li>
+                {% else %}
+                    <li><a href="{{ path('app_login') }}" class="nav-link px-3 link-dark fw-bolder">Přihlásit se</a></li>
+                    <li><a href="{{ path('app_register') }}" class="nav-link px-3 link-dark fw-bolder">Registrovat se</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</header>
 {% block body %}{% endblock %}
 
 {% block javascripts %}

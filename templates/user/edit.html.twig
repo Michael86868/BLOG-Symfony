@@ -1,13 +1,110 @@
-<!DOCTYPE html>
-
-<title>Edit User</title>
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Edit User</h1>
-
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+    <section class="users container mt-5 col-6 pt-5">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-4 mx-auto overflow-auto">
+                <div class="card">
+                    <div class="card-body w-75 d-block mx-auto">
+                        <div class="img overflow-hidden rounded-circle">
+                            <img src="{{ asset('images/avatars/av.jpg') }}" class="img-fluid p-1" alt="avatar">
+                        </div>
+                        <div class="mt-4">
+                            <p class="h4 text-center text-dark fw-bolder">{{ user.username }}</p>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-center h6">{{ user.industry }}</p>
+                        </div>
+                        <div class="mt-2 mb-4">
+                            <p class="text-center h6">{{ user.city }}, Czech Republic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 mx-auto overflow-auto">
+                <div class="card">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless h7">
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Přezdívka</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.username, {'attr': {'class': 'form-control','placeholder': 'Username'}, 'label': ' ',}) }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Zaměření</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.industry, {'attr': {'class': 'form-control','placeholder': 'Industry'}, 'label': ' ',}) }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Email</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder': 'Email'}, 'label': ' ',}) }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Datum narození</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.birthdate, {'attr': {'class': 'form-control','placeholder': 'Birthdate'}, 'label': ' ',}) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bolder py-3">Adresa</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.city, {'attr': {'class': 'form-control','placeholder': 'City'}, 'label': ' ',}) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless">
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/web.png') }}" height="20" class="me-2">Stránky</td>
+                                <td class="text-muted font-verdana py-3">Činel page</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/github.png') }}" height="24" class="me-2">Github</td>
+                                <td class="text-muted font-verdana py-3">Michael86868</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/facebook.png') }}" height="24" class="me-2">Facebook</td>
+                                <td class="text-muted font-verdana py-3">michael.k86</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bolder py-3"><img src="{{ asset('images/twitter.png') }}" height="24" class="me-2">Twitter</td>
+                                <td class="text-muted font-verdana py-3">Michael</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless h7">
+                            <tr>
+                                <td class="fw-bolder py-3" colspan="2">Něco o uživateli</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.bio, {'attr': {'class': 'form-control','placeholder': 'Biography'}, 'label': ' ',}) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body w-100 d-block mx-auto pb-1">
+                        <table class="table table-borderless h7">
+                            <tr>
+                                <td class="fw-bolder py-3" colspan="2">Dodatečné informace</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Pohlaví</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.gender, {'attr': {'class': 'form-control','placeholder': 'Gender'}, 'label': ' ',}) }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="fw-bolder py-3">Heslo</td>
+                                <td class="text-muted font-verdana h8 py-3">{{ form_widget(form.password, {'attr': {'class': 'form-control','placeholder': 'Password'}, 'label': ' ',}) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success px-3">{{ button_label|default('Uložit') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}
