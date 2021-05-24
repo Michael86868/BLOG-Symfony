@@ -28,11 +28,6 @@ class Post
     private string $content;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
-     */
-    private ?array $tags = [];
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $createdAt;
@@ -79,20 +74,6 @@ class Post
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getTags(): array
-    {
-        $tags = $this->tags;
-
-        return array_unique($tags);
-    }
-
-    public function setTags(?array $tags): self
-    {
-        $this->tags = $tags;
 
         return $this;
     }
