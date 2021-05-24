@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,12 +30,17 @@ class ApprovalController extends AbstractController
     /**
      * @Route("/approval/{post}", name="approval_view_post", methods={"GET","POST"})
      */
-    public function approval(Request $request, Post $post): Response
+    public function approval(Request $request, Post $post, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $post->setImage($imageFileName);
+            }
             $this->getDoctrine()->getManager()->flush();
         }
 
