@@ -38,14 +38,14 @@ class PostType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('tags',ChoiceType::class,[
+            /*->add('tags',ChoiceType::class,[
                 'multiple'=>true,
                 'expanded'=>true,
                 'choices'=>[
                     'PHP'=>'PHP',
                     'CSS'=>'CSS'
                 ]
-            ])
+            ])*/
         ;
     }
 
