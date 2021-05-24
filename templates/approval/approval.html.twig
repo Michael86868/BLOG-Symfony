@@ -3,14 +3,31 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 100%; background-color: transparent;">
+            <div class="modal-body">
+                <img src="{{ asset('/upload/images/'~post.image) }}" alt="Image" class="mx-auto d-block img-fluid">
+            </div>
+        </div>
+    </div>
+
     <section class="container mt-5">
         <div class="row">
             <div class="col-xl-12">
                 <h1 class="text-center">Nový příspěvek</h1>
             </div>
             {{ form_start(form) }}
+
             {{ form_row(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Název tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
-            {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-4 m-2 fw-bolder'}}) }}
+            {{ form_label(form.image, 'Náhledový obrázek -', {'label_attr':{'class': 'mt-5 m-2 me-0 fw-bolder'}}) }}
+            <div class="d-inline">
+                <a class="text-decoration-none fw-bold" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Zobrazit
+                </a>
+            </div>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control','placeholder': 'Vybrat soubor'} }) }}
+
+            {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
             <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-5 mb-0 px-6 filter-tags">
                 <div class="col bg-danger">
                     <span>TAGS</span>
@@ -51,4 +68,13 @@
             {{ form_end(form) }}
         </div>
     </section>
+
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
 {% endblock %}

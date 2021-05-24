@@ -6,14 +6,9 @@
     <section class="container mt-5 approval">
         <div class="col-8 mx-auto">
             <div class="col-xl-12">
-                <img src="{{ asset('images/blogzk.jpg') }}" alt="Image" class="mx-auto d-block">
+                <img src="{{ asset('/upload/images/'~post.image) }}" alt="Image" class="mx-auto d-block">
             </div>
             <div class="col-xl-12 text-center mt-3">
-                <div class="d-flex justify-content-between text-muted h6 mb-5">
-                    <span class="ms-5 fw-bolder"><span class="fw-bolder fa fa-user-circle-o me-2"></span>{{ post.author.username }}</span>
-                    <span class="mx-5 fw-bolder"><span class="fw-bolder fa fa-eye me-2 "></span>500</span>
-                    <span class="me-5 fw-bolder"><span class="fw-bolder fa fa-calendar-o me-2"></span>{{ post.createdAt|date('Y-m-d') }}</span>
-                </div>
                 <h1 class="text-center mt-5">{{ post.title }}</h1>
                 <div class="row px-5">
                     {{ post.content|raw }}
