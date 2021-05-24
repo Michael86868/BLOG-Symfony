@@ -1,6 +1,7 @@
 :root{
   --bg-primary: #F2F4F3;
-  --bg-navbar: #4282B3;
+  --bg-navbar: #29272b;  //#4080b1;
+  --text-navbar: #f2f4f3;
   --primary-color: #4282B3;
   --secondary-color: #D62828;
   --text-color: #0A0908;
@@ -307,7 +308,32 @@ section.approval{
   }
 }
 
+nav{
+  > .container{
+    > .navbar-collapse{
+      > .navbar-nav{
+        > li{
+          > a{
+            color: var(--text-navbar);
+            &:hover{
+              color: var(--text-navbar);
+              opacity: 0.6;
+            }
+            >span.nav-link{
+              color: var(--text-navbar);
+              &:hover, &:focus, &:active{
+                color: var(--text-navbar);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
 .dropdown-item:hover{
-  background: var(--bg-navbar);
+  background: var(--bg-primary);
   color: #000;
 }

@@ -33,11 +33,11 @@
             <ul class="navbar-nav ">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle px-0 d-inline" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle px-0 d-inline text-light" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="35" class="ms-3 rounded-circle d-inline">
-                            <span class="nav-link ps-2 pe-0 link-dark fw-bolder pt-1 d-inline">{{ app.user.username }}</span>
+                            <span class="nav-link ps-2 pe-0 link-light fw-bolder pt-1 d-inline">{{ app.user.username }}</span>
                         </a>
-                        <ul class="dropdown-menu ms-3 mt-2 bg-navbar shadow">
+                        <ul class="dropdown-menu ms-3 mt-2 bg-light shadow">
                             <li><a class="dropdown-item" href="{{ path('user_show', {'id': app.user.id}) }}">Profil</a></li>
                             <li><a class="dropdown-item" href="{{ path('user_edit', {'id': app.user.id}) }}">Upravit profil</a></li>
                             <hr class="my-1">
