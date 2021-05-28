@@ -39,9 +39,9 @@ class PostTags
      */
     private $posts;
 
-    public function __construct()
+    public function __toString()
     {
-        $this->posts = new ArrayCollection();
+        return $this->name;
     }
 
     public function getId(): ?int
