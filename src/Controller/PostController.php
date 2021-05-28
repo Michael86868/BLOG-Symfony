@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostTags;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\FileUploader;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,13 +44,15 @@ class PostController extends AbstractController
                 $post->setImage($imageFileName);
             }
             $entityManager = $this->getDoctrine()->getManager();
+            foreach($form->get('tags')->getData() as $item){
+                $post->getTags()->add($entityManager->getRepository(PostTags::class)->find($item));
+            }
             $post->setAuthor($this->getUser());
             $entityManager->persist($post);
             $entityManager->flush();
 
             return $this->redirectToRoute('post_index');
         }
-
         return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
@@ -70,15 +74,26 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post, FileUploader $fileUploader): Response
     {
+        $checkedTags = new ArrayCollection();
+
+        foreach($post->getTags() as $tag) {
+            $checkedTags->add($tag->getId());
+        }
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if($imageFile) {
                 $imageFileName = $fileUploader->upload($imageFile);
                 $post->setImage($imageFileName);
+            }
+            foreach($post->getTags() as $tag) {
+                $post->removeTag($this->getDoctrine()->getManager()->getRepository(PostTags::class)->find($tag));
+            }
+            foreach($form->get('tags')->getData() as $item){
+                $post->getTags()->add($this->getDoctrine()->getManager()->getRepository(PostTags::class)->find($item));
             }
             $this->getDoctrine()->getManager()->flush();
 
@@ -88,6 +103,7 @@ class PostController extends AbstractController
         return $this->render('post/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
+            'checkedTags' => $checkedTags,
         ]);
     }
 

@@ -8,7 +8,54 @@
             <div class="col-xl-12">
                 <h1 class="text-center">Nový příspěvek</h1>
             </div>
-            {{ include('post/_form.html.twig') }}
+            {{ form_start(form) }}
+            {{ form_row(form.image, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Náhledový obrázek', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
+            {{ form_row(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Název tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
+            {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-4 m-2 fw-bolder'}}) }}
+
+            <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-5 mb-0 px-6 filter-tags">
+                <div class="col bg-danger">
+                    <span>TAGS</span>
+                    {{ form_label(form.tags, " ", {'label_attr': {'class': 's-2 fa fa-tag'} }) }}
+                </div>
+                {% for postTag in form.tags %}
+                    <label class="tag px-0 ms-2 col-1">
+                        {% if postTag.vars.value in checkedTags %}
+                            {{ form_widget(postTag, {'attr': {'class': 'd-none', 'checked': 'true'}}) }}
+                        {% else %}
+                            {{ form_widget(postTag, {'attr': {'class': 'd-none'}}) }}
+                        {% endif %}
+                        <span class="btn px-2 py-0 align-baseline">{{ postTag.vars.label }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+
+
+
+            <script>
+
+                tinymce.init({
+                    selector: "#post_content",
+                    language: "cs",
+                    entity_encoding: "raw",
+                    min_height: 450,
+                    height: 450,
+                    browser_spellcheck: true,
+                    //images_upload_url:  @TODO: Assign a path to filter images
+                    //images_upload_base_path: @TODO: Set the controller to add images
+                    convert_urls: false,
+                    paste_data_images: true,
+                    plugins: "media image link lists paste preview hr wordcount table",
+                    toolbar: "bold italic strikethrough forecolor backcolor | link image | numlist bullist | alignleft aligncenter alignright alignjustify | table"
+                });
+
+            </script>
+
+            <div class="mx-auto text-center mt-5">
+                <button class="btn btn-primary p-2 px-4">{{ button_label|default('Uložit') }}</button>
+            </div>
+
+            {{ form_end(form) }}
         </div>
     </section>
 {% endblock %}

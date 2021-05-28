@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,11 +29,6 @@ class Post
     private string $content;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
-     */
-    private ?array $tags = [];
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $createdAt;
@@ -53,10 +49,16 @@ class Post
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=PostTags::class, inversedBy="posts")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable);
         $this->Approval = new Approval();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,20 +86,6 @@ class Post
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getTags(): array
-    {
-        $tags = $this->tags;
-
-        return array_unique($tags);
-    }
-
-    public function setTags(?array $tags): self
-    {
-        $this->tags = $tags;
 
         return $this;
     }
@@ -146,6 +134,28 @@ class Post
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function addTag(PostTags $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(PostTags $tag): self
+    {
+        $this->tags->removeElement($tag);
 
         return $this;
     }

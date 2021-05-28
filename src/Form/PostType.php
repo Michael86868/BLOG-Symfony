@@ -3,10 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Entity\PostTags;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -38,13 +37,11 @@ class PostType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('tags',ChoiceType::class,[
-                'multiple'=>true,
-                'expanded'=>true,
-                'choices'=>[
-                    'PHP'=>'PHP',
-                    'CSS'=>'CSS'
-                ]
+            ->add('tags', EntityType::class, [
+                'class' => PostTags::class,
+                'mapped' => false,
+                'expanded' => true,
+                'multiple' => true,
             ])
         ;
     }

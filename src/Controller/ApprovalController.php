@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostTags;
 use App\Form\PostType;
 use App\Service\FileUploader;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +34,12 @@ class ApprovalController extends AbstractController
      */
     public function approval(Request $request, Post $post, FileUploader $fileUploader): Response
     {
+        $checkedTags = new ArrayCollection();
+
+        foreach($post->getTags() as $tag) {
+            $checkedTags->add($tag->getId());
+        }
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -41,12 +49,21 @@ class ApprovalController extends AbstractController
                 $imageFileName = $fileUploader->upload($imageFile);
                 $post->setImage($imageFileName);
             }
+            foreach($post->getTags() as $tag) {
+                $post->removeTag($this->getDoctrine()->getManager()->getRepository(PostTags::class)->find($tag));
+            }
+            foreach($form->get('tags')->getData() as $item){
+                $post->getTags()->add($this->getDoctrine()->getManager()->getRepository(PostTags::class)->find($item));
+            }
             $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('approval/approval.html.twig', [
+        return $this->render('post/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
+            'checkedTags' => $checkedTags,
         ]);
     }
 
