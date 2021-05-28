@@ -17,17 +17,10 @@
                 <h1 class="text-center">Nový příspěvek</h1>
             </div>
             {{ form_start(form) }}
-
+            {{ form_row(form.image, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Náhledový obrázek', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
             {{ form_row(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Název tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
-            {{ form_label(form.image, 'Náhledový obrázek -', {'label_attr':{'class': 'mt-5 m-2 me-0 fw-bolder'}}) }}
-            <div class="d-inline">
-                <a class="text-decoration-none fw-bold" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Zobrazit
-                </a>
-            </div>
-            {{ form_widget(form.image, {'attr': {'class': 'form-control','placeholder': 'Vybrat soubor'} }) }}
+            {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-4 m-2 fw-bolder'}}) }}
 
-            {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
             <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-5 mb-0 px-6 filter-tags">
                 <div class="col bg-danger">
                     <span>TAGS</span>
@@ -35,11 +28,17 @@
                 </div>
                 {% for postTag in form.tags %}
                     <label class="tag px-0 ms-2 col-1">
-                        {{ form_widget(postTag, {'attr': {'class': 'd-none'}}) }}
+                        {% if postTag.vars.value in checkedTags %}
+                            {{ form_widget(postTag, {'attr': {'class': 'd-none', 'checked': 'true'}}) }}
+                        {% else %}
+                            {{ form_widget(postTag, {'attr': {'class': 'd-none'}}) }}
+                        {% endif %}
                         <span class="btn px-2 py-0 align-baseline">{{ postTag.vars.label }}</span>
                     </label>
                 {% endfor %}
             </div>
+
+
 
             <script>
 
@@ -50,8 +49,8 @@
                     min_height: 450,
                     height: 450,
                     browser_spellcheck: true,
-                    //images_upload_url: "https://leosight.cz/core/ajax/forum_upload.php",
-                    //images_upload_base_path: "https://cdn.leosight.cz/img/",
+                    //images_upload_url:  @TODO: Assign a path to filter images
+                    //images_upload_base_path: @TODO: Set the controller to add images
                     convert_urls: false,
                     paste_data_images: true,
                     plugins: "media image link lists paste preview hr wordcount table",
@@ -62,10 +61,10 @@
 
             <div class="mx-auto text-center mt-5">
                 <button class="btn btn-primary p-2 px-4">{{ button_label|default('Uložit') }}</button>
-                <a href="{{ path('approval_post', {'post': post.id}) }}" class="btn btn-success p-2 px-4">Schválit</a>
             </div>
 
             {{ form_end(form) }}
+
         </div>
     </section>
 
