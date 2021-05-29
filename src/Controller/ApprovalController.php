@@ -57,10 +57,9 @@ class ApprovalController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('post_index');
         }
 
-        return $this->render('post/edit.html.twig', [
+        return $this->render('approval/approval.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
             'checkedTags' => $checkedTags,
