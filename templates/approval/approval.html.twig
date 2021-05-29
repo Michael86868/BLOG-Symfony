@@ -3,13 +3,26 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 100%; max-width: 800px; background-color: transparent;">
+            <div class="modal-body py-0">
+                <img src="{{ asset('/upload/images/'~post.image) }}" alt="Image" class="mx-auto d-block img-fluid">
+            </div>
+        </div>
+    </div>
     <section class="container mt-5">
         <div class="row">
             <div class="col-xl-12">
                 <h1 class="text-center">Schválení příspěvku</h1>
             </div>
             {{ form_start(form) }}
-            {{ form_row(form.image, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Náhledový obrázek', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
+            {{ form_label(form.image, 'Náhledový obrázek -', {'label_attr':{'class': 'mt-5 m-2 me-0 fw-bolder'}}) }}
+            <div class="d-inline">
+                <a class="text-decoration-none fw-bold" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Zobrazit
+                </a>
+            </div>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control','placeholder': 'Vybrat soubor'} }) }}
             {{ form_row(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Název tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
             {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-4 m-2 fw-bolder'}}) }}
 
