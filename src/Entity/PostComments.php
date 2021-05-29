@@ -37,7 +37,7 @@ class PostComments
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="postComments")
      */
-    private Collection $post;
+    private Post $post;
 
     public function getId(): ?int
     {
