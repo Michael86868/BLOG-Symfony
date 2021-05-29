@@ -68,12 +68,12 @@ class Approval
         return $this;
     }
 
-    public function getApprovedBy(): ?User
+    public function getApprovedBy(): ?UserInterface
     {
         return $this->approvedBy;
     }
 
-    public function setApprovedBy(?User $approvedBy): self
+    public function setApprovedBy(?UserInterface $approvedBy): self
     {
         $this->approvedBy = $approvedBy;
 

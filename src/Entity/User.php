@@ -87,10 +87,16 @@ class User implements UserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostComments::class, mappedBy="author")
+     */
+    private $postComments;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->approvals = new ArrayCollection();
+        $this->postComments = new ArrayCollection();
     }
 
     public function __toString()
@@ -320,6 +326,36 @@ class User implements UserInterface
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostComments[]
+     */
+    public function getPostComments(): Collection
+    {
+        return $this->postComments;
+    }
+
+    public function addPostComment(PostComments $postComment): self
+    {
+        if (!$this->postComments->contains($postComment)) {
+            $this->postComments[] = $postComment;
+            $postComment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostComment(PostComments $postComment): self
+    {
+        if ($this->postComments->removeElement($postComment)) {
+            // set the owning side to null (unless already changed)
+            if ($postComment->getAuthor() === $this) {
+                $postComment->setAuthor(null);
+            }
+        }
 
         return $this;
     }

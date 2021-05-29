@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,18 +48,24 @@ class Post
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $image;
+    private string $image;
 
     /**
      * @ORM\ManyToMany(targetEntity=PostTags::class, inversedBy="posts")
      */
-    private $tags;
+    private Collection $tags;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PostComments::class, mappedBy="post")
+     */
+    private Collection $postComments;
 
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable);
         $this->Approval = new Approval();
         $this->tags = new ArrayCollection();
+        $this->postComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +163,36 @@ class Post
     public function removeTag(PostTags $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostComments[]
+     */
+    public function getPostComments(): Collection
+    {
+        return $this->postComments;
+    }
+
+    public function addPostComment(PostComments $postComment): self
+    {
+        if (!$this->postComments->contains($postComment)) {
+            $this->postComments[] = $postComment;
+            $postComment->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostComment(PostComments $postComment): self
+    {
+        if ($this->postComments->removeElement($postComment)) {
+            // set the owning side to null (unless already changed)
+            if ($postComment->getPost() === $this) {
+                $postComment->setPost(null);
+            }
+        }
 
         return $this;
     }
