@@ -39,6 +39,11 @@ class PostComments
      */
     private Post $post;
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
