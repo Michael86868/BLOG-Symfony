@@ -18,7 +18,7 @@
                     <a class="text-decoration-none text-dark" href="{{ path('user_show', {'id': post.author.id}) }}">{{ post.author.username }}</a>
                     <span class="date">| {{ post.createdAt|date('d.m.Y') }}</span>
                 </p>
-                <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-3 mb-0 px-6 filter-tags px-5">
+                <div class="row row-cols-auto g-4 ms-0 mt-3 mb-0 filter-tags px-5">
                     <div class="col bg-danger">
                         <span>TAGS<span class="ms-2 fa fa-tag"></span></span>
                     </div>
@@ -29,10 +29,31 @@
                     {% endfor %}
                 </div>
                 <hr class="mt-5">
+                <div class="row mt-3 mb-0 py-3 bg-light text-start shadow-sm">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <h5 class="ms-3">Přidat nový komentář</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="40" class="ms-md-3 rounded-circle d-inline post-comments-img">
+                        </div>
+                        <div class="col-11">
+                            {{ form_row(form.content, {'attr': {'class': 'form-control mb-2'}, 'label_attr':{'class': 'm-2 fw-bolder'}}) }}
+                            <div class="row">
+                                <div class="mx-auto text-center">
+                                    <button class="btn btn-success fw-bold p-2 px-3">{{ button_label|default('Přidat') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
                 {% for comment in post.getPostComments %}
                 <div class="row mt-3 mb-0 py-3 bg-light text-start shadow-sm">
                     <div class="col-1">
-                        <img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="40" class="ms-3 rounded-circle d-inline">
+                        <img src="{{ asset('images/avatars/av.jpg') }}" alt="" height="40" class="ms-md-3 rounded-circle d-inline post-comments-img">
                     </div>
                     <div class="col-11">
                         <div class="row">
@@ -47,14 +68,14 @@
                                 </span>
                             </div>
                         </div>
-                        <p class="d-block">
+                        <p class="d-block mb-2">
                             {{ comment.content }}
                         </p>
                         <div class="row">
                             <form method="post" action="{{ path('delete_comment', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-                                <button class="bg-transparent border-0">
-                                    <p class="text-muted m-0" style="font-size: 0.9em;">Odstranit</p>
+                                <button class="bg-transparent border-0 p-0">
+                                    <p class="text-muted m-0" style="font-size: 0.8em;">Odstranit</p>
                                 </button>
                             </form>
                         </div>

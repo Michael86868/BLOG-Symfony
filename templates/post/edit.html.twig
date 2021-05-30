@@ -13,13 +13,13 @@
             {{ form_row(form.title, {'attr': {'class': 'form-control','placeholder': 'Title'}, 'label': 'Název tématu', 'label_attr':{'class': 'mt-5 m-2 fw-bolder'}}) }}
             {{ form_row(form.content, {'attr': {'id': 'content'}, 'label': 'Obsah tématu', 'label_attr':{'class': 'mt-4 m-2 fw-bolder'}}) }}
 
-            <div class="row row-cols-1 row-cols-lg-auto g-4 ms-0 mt-5 mb-0 px-6 filter-tags">
+            <div class="row row-cols-auto g-4 ms-0 mt-3 mb-0 filter-tags">
                 <div class="col bg-danger">
                     <span>TAGS</span>
                     {{ form_label(form.tags, " ", {'label_attr': {'class': 's-2 fa fa-tag'} }) }}
                 </div>
                 {% for postTag in form.tags %}
-                    <label class="tag px-0 ms-2 col-1">
+                    <label class="tag px-0 ms-2">
                         {% if postTag.vars.value in checkedTags %}
                             {{ form_widget(postTag, {'attr': {'class': 'd-none', 'checked': 'true'}}) }}
                         {% else %}
