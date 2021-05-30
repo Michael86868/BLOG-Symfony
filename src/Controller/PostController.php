@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostComments;
 use App\Entity\PostTags;
+use App\Form\PostCommentType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\FileUploader;
@@ -60,12 +62,32 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
+     * @Route("/{id}", name="post_show", methods={"GET","POST"})
      */
-    public function show(Post $post): Response
+    public function show(Request $request, Post $post): Response
     {
+        $postComment = new PostComments();
+        $form = $this->createForm(PostCommentType::class, $postComment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if(!$this->getUser()){
+                $this->addFlash('error', 'Komentář nemohl být přidán, protože nejsi přihlášen !');
+            }else{
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $postComment->setAuthor($this->getUser());
+                $postComment->setPost($post);
+
+                $entityManager->persist($postComment);
+                $entityManager->flush();
+                $this->addFlash('success', 'Komentář byl úspěšně přidán.');
+            }
+        }
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -108,7 +130,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="post_delete", methods={"POST"})
      */
     public function delete(Request $request, Post $post): Response
     {

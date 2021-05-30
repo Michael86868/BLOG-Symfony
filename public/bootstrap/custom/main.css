@@ -282,4 +282,23 @@ section.approval table > thead {
   color: #000;
 }
 
+.form-errors > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.form-errors > ul > li {
+  margin-bottom: 5px;
+}
+.form-errors > ul > li:before {
+  margin-right: 7.5px;
+  content: "ERROR";
+  font-size: 0.8em;
+  border-radius: 5px;
+  padding: 4px;
+  font-weight: bolder;
+  color: white;
+  background-color: var(--bs-danger);
+}
+
 /*# sourceMappingURL=main.css.map */

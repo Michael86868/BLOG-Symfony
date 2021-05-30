@@ -52,6 +52,13 @@
   color: #b02a37;
 }
 
+.link-error {
+  color: #dc3545;
+}
+.link-error:hover, .link-error:focus {
+  color: #b02a37;
+}
+
 .link-light {
   color: #f8f9fa;
 }
@@ -434,6 +441,10 @@
 }
 
 .border-danger {
+  border-color: #dc3545 !important;
+}
+
+.border-error {
   border-color: #dc3545 !important;
 }
 
@@ -1266,6 +1277,10 @@
   color: #dc3545 !important;
 }
 
+.text-error {
+  color: #dc3545 !important;
+}
+
 .text-light {
   color: #f8f9fa !important;
 }
@@ -1319,6 +1334,10 @@
 }
 
 .bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-error {
   background-color: #dc3545 !important;
 }
 
