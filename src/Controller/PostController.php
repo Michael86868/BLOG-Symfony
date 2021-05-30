@@ -71,13 +71,18 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            if(!$this->getUser()){
+                $this->addFlash('error', 'Komentář nemohl být přidán, protože nejsi přihlášen !');
+            }else{
+                $entityManager = $this->getDoctrine()->getManager();
 
-            $postComment->setAuthor($this->getUser());
-            $postComment->setPost($post);
+                $postComment->setAuthor($this->getUser());
+                $postComment->setPost($post);
 
-            $entityManager->persist($postComment);
-            $entityManager->flush();
+                $entityManager->persist($postComment);
+                $entityManager->flush();
+                $this->addFlash('success', 'Komentář byl úspěšně přidán.');
+            }
         }
 
         return $this->render('post/show.html.twig', [

@@ -19,6 +19,7 @@ class PostCommentController extends AbstractController
     {
 
         if($this->getUser() !== $postComments->getAuthor() && !in_array("ROLE_ADMIN",$this->getUser()->getRoles()))
+            $this->addFlash('error', 'Nemůžeš smazat tento komentář !');
             return $this->redirectToRoute('post_show', [
                 'id' => $postComments->getPost()->getId(),
             ]);
@@ -27,6 +28,7 @@ class PostCommentController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($postComments);
             $entityManager->flush();
+            $this->addFlash('success', "Komentář byl úspěšně smazán.");
         }
 
         return $this->redirectToRoute('post_show', [

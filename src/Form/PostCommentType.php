@@ -26,9 +26,9 @@ class PostCommentType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your content should be at least {{ limit }} characters',
+                        'minMessage' => 'Tvůj komentář musí obsahovat nejméně {{ limit }} znaků',
                         'max' => 4096,
-                        'maxMessage' => 'Your content should be longer than {{ limit }} characters',
+                        'maxMessage' => 'Tvůj komentář nesmí mít více než {{ limit }} znaků',
                     ]),
                 ],
             ])
