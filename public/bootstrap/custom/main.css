@@ -301,4 +301,38 @@ section.approval table > thead {
   background-color: var(--bs-danger);
 }
 
+@font-face {
+  font-family: Mulish-bold;
+  src: url("../../fonts/Mulish-Bold.ttf");
+}
+@font-face {
+  font-family: Mulish;
+  src: url("../../fonts/Mulish-Regular.ttf");
+}
+.weather-data > .col-lg-12 #date {
+  font-size: 1.7em;
+  color: #3888ff;
+  font-weight: bolder;
+}
+.weather-data > .col-lg-12 #time {
+  font-size: 1.7em;
+  color: #3888ff;
+  font-weight: bolder;
+}
+.weather-data > .col-lg-3 > .card {
+  border: 1px solid rgba(69, 69, 69, 0.1);
+}
+.weather-data > .col-lg-3 > .card > .card-body > .row > .col-9 > .card-title {
+  font-family: Mulish;
+  font-size: 1em;
+}
+.weather-data > .col-lg-3 > .card > .card-body > .row > .col-9 > .card-text {
+  font-family: Mulish-bold;
+  color: #1a1e21;
+  font-size: 1.1em;
+}
+body {
+  font-family: Mulish;
+}
+
 /*# sourceMappingURL=main.css.map */
