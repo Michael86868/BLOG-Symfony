@@ -61,4 +61,13 @@ class WeatherStationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findOneColumn($column)
+    {
+        return $this->createQueryBuilder('w')
+            ->select('w.'.$column)
+            ->orderBy('w.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
