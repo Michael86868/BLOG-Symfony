@@ -3,6 +3,7 @@
 {% block title %}Post index{% endblock %}
 
 {% block body %}
+    <script src="{{ asset('chart.js/dist/chart.js') }}"></script>
     <section class="container mt-5">
         <div class="row">
             <div class="col-xl-12 mb-5">
@@ -27,7 +28,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Teplota</p>
-                                <p class="card-text"><span>24</span> °C</p>
+                                <p class="card-text"><span>{{ lastRecord.bmeTemperature|round(2) }}</span> °C</p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg viewBox="0 0 512 512" width="50" height="50" style="fill: #e67300;">
@@ -44,7 +45,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Vlhkost vzduchu</p>
-                                <p class="card-text"><span></span>72 %</p>
+                                <p class="card-text"><span></span>{{ lastRecord.bmeHumidity|round(2) }} %</p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg viewBox="0 0 383.344 383.345" width="50" height="50" style="fill: #41bf95;" >
@@ -61,7 +62,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Atmosferický tlak</p>
-                                <p class="card-text"><span>964,5</span> hPa</p>
+                                <p class="card-text"><span>{{ lastRecord.bmePressure|round(1) }}</span> hPa</p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg viewBox="0 0 512 512" width="50" height="50" style="fill: #21a8fc;">
@@ -78,7 +79,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Nadmořská výška</p>
-                                <p class="card-text"><span>Nedoplněné</span></p>
+                                <p class="card-text"><span>{{ lastRecord.bmeAltitude|round(1) }}</span> m n. m.</p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg height="50" viewBox="0 -78 512.0003 512" width="50" style="fill: #B80F0A;">
@@ -95,7 +96,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Rychlost větru</p>
-                                <p class="card-text"><span>Nedoplněné</span></p>
+                                <p class="card-text"><span>{{ lastRecord.windSpeed|default("Nedoplněné") }}</span></p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg viewBox="0 0 448 448" style="fill: #03d3fc;" width="50" height="50">
@@ -112,7 +113,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">UV Index</p>
-                                <p class="card-text"><span>Nedoplněné</span></p>
+                                <p class="card-text"><span>{{ lastRecord.indexUV|default("Nedoplněné") }}</span></p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg width="50" height="50px" viewBox="0 0 45.16 45.16" style="fill: #FFF44F;" >
@@ -129,7 +130,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Východ slunce</p>
-                                <p class="card-text"><span>Nedoplněné</span></p>
+                                <p class="card-text"><span>{{ lastRecord.sunrise|default("Nedoplněné") }}</span></p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg viewBox="0 0 387.162 387.162" style="fill: #FFA500;" height="50" width="50">
@@ -146,7 +147,7 @@
                         <div class="row">
                             <div class="col-9 ps-3">
                                 <p class="card-title">Západ slunce</p>
-                                <p class="card-text"><span>Nedoplněné</span></p>
+                                <p class="card-text"><span>{{ lastRecord.sunset|default("Nedoplněné") }}</span></p>
                             </div>
                             <div class="col-3 d-flex align-items-center justify-content-center">
                                 <svg height="50" viewBox="0 0 512 512" width="50" style="fill: #F94D00;">
@@ -158,26 +159,56 @@
                 </div>
             </div>
         </div>
+        <div class="chart col-12" style="max-height: 300px">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
 
 
-
-
-
-        {#  {{ lastRecord.id }}
-        <br>
-        {% for d in data %}
-            {{ d.id }}
-            {{ d.dallasTemperature1 }}
-            {{ d.dallasTemperature2 }}
-            {{ d.dallasTemperature3 }}
-            {{ d.bmeTemperature }}
-            {{ d.bmePressure }}
-            {{ d.bmeAltitude }}
-            {{ d.bmeHumidity }}
-            {{ d.gasMQ }}
-            {{ d.createdAt|date('Y-m-d H:i:s') }}
-            <br>
-        {% endfor %}#}
+        <script>
+            let ctx = document.getElementById('myChart').getContext('2d');
+            let myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{ datetime|json_encode|raw }},
+                    datasets: [
+                        {
+                            label: 'Dallas1',
+                            data: {{ dallas1 }},
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                        },
+                        {
+                            label: 'Dallas2',
+                            data: {{ dallas2 }},
+                            borderColor: '#F3581E',
+                            borderWidth: 1,
+                        },
+                        {
+                            label: 'Dallas3',
+                            data: {{ dallas3 }},
+                            borderColor: '#2A389A',
+                            borderWidth: 1,
+                        },
+                        {
+                            label: 'BME280',
+                            data: {{ bmeTemp }},
+                            borderColor: '#6442FD',
+                            borderWidth: 1,
+                        }
+                    ]
+                },
+                options: {
+                    position: 'bottom',
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            suggestedMin: 20,
+                            suggestedMax: 27,
+                        }
+                    }
+                }
+            });
+        </script>
         <script>
             function digitalClock(){
                 let now = new Date();

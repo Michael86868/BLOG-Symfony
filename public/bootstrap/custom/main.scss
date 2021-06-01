@@ -339,6 +339,7 @@ section.approval{
   font-family: Mulish;
   src: url("../../fonts/Mulish-Regular.ttf");
 }
+
 .weather-data{
   >.col-lg-12{
     #date{
@@ -347,7 +348,7 @@ section.approval{
       font-weight: bolder;
     }
     #time{
-      font-size: 1.7em;
+      font-size: 1.9em;
       color: #3888ff;
       font-weight: bolder;
     }
@@ -378,4 +379,8 @@ section.approval{
 }
 body{
   font-family: Mulish;
+}
+#myChart{
+  width: 400px;
+  height: 400px;
 }
