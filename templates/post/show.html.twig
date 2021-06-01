@@ -82,7 +82,7 @@
                         <p class="d-block mb-2">
                             {{ comment.content }}
                         </p>
-                        {% if is_granted('ROLE_ADMIN') or comment.author.id == app.user.id %}
+                        {% if is_granted('ROLE_ADMIN') or comment.author.id == app.user.id|default(0) %}
                         <div class="row">
                             <form method="post" action="{{ path('delete_comment', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
