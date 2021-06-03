@@ -24,8 +24,12 @@
                 <div class="col">
                     <div class="card h-100 shadow">
                         <div class="card-img position-relative">
-                            {{ include('post/_delete_form.html.twig') }}
-                            <a class="position-absolute ms-5" href="{{ path('post_edit', {'id': post.id}) }}"><span class="fa fa-edit text-primary"></span></a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                {{ include('post/_delete_form.html.twig') }}
+                            {% endif %}
+                            {% if app.user.id == post.author.id or is_granted('ROLE_ADMIN') %}
+                                <a class="position-absolute ms-5" href="{{ path('post_edit', {'id': post.id}) }}"><span class="fa fa-edit text-primary"></span></a>
+                            {% endif %}
                             <div class="position-absolute bottom-0 end-0 mb-2 me-2 card-tag">
                                 {% for tag in post.getTags %}
                                     {{ tag.name }}
@@ -50,13 +54,13 @@
                 {% else %}
             </div>
             <div class="col-xl-12 text-center mt-5">
-                <p class="h4 text-danger">Zatím nejsou uveřejněny žádné příspěvky</p>
+                <p class="h4 text-danger fw-bold">Zatím nejsou uveřejněny žádné příspěvky</p>
             </div>
             {% endfor %}
         </div>
         {% if is_granted('ROLE_ADMIN') %}
         <div class="text-center mt-4">
-            <a class="btn btn-primary" href="{{ path('post_new') }}">Create new</a>
+            <a class="btn btn-primary" href="{{ path('post_new') }}">Vytvořit příspěvek</a>
         </div>
         {% endif %}
     </section>
