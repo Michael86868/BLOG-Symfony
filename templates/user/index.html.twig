@@ -8,16 +8,16 @@
             <div class="col-xl-12">
                 <h1 class="text-center">Uživatelé</h1>
             </div>
-            <div class="col-xl-12 mx-auto overflow-auto">
-                <table class="table px-5 mt-5" id="users-show">
+            <div class="col-xl-12 mx-auto overflow-auto table-responsive">
+                <table class="table px-md-5 mt-5" id="users-show">
                     <thead>
                     <tr>
-                        <th><span>User</span></th>
-                        <th><span>Created</span></th>
+                        <th><span>Uživatel</span></th>
+                        <th><span>Registrován</span></th>
                         {#  <th>Password</th> #}
                         <th><span>Email</span></th>
-                        <th><span>Industry</span></th>
-                        <th><span>Actions</span></th>
+                        <th><span>Zaměření</span></th>
+                        <th><span>Akce</span></th>
                     </tr>
                     </thead>
                     {% for user in users %}
@@ -51,15 +51,17 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="7">Nebyly nalezeny žádné záznamy</td>
+                            <td colspan="7"><p class="h5 text-center fw-bolder">Zatím není žádný registrovaný uživatel.</p></td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
         </div>
-        <div class="col-xl-12 text-center">
-            <a style="padding: 10px 20px;" class="btn btn-primary" href="{{ path('user_new') }}">Create new</a>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-xl-12 text-center">
+                <a style="padding: 10px 20px;" class="btn btn-primary" href="{{ path('user_new') }}">Vytvořit uživatele</a>
+            </div>
+        {% endif %}
     </section>
 
 {% endblock %}

@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ flashError }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-
-
     <section class="container mt-5 register">
         <div class="row">
             <div class="col-xl-12">

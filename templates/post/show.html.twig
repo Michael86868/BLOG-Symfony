@@ -5,14 +5,6 @@
 {% block body %}
     <section class="container mt-5 approval">
         <div class="col-xl-8 mx-auto">
-            {% for label, messages in app.flashes(['success', 'error']) %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-                        <strong>{{ message }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
-            {% endfor %}
             <div class="col-xl-12">
                 <img src="{{ asset('/upload/images/'~post.image) }}" alt="Image" class="mx-auto d-block img-fluid">
             </div>

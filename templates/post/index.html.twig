@@ -12,22 +12,12 @@
                 <div class="col bg-danger">
                     <span>FILTER BY<span class="ms-2 fa fa-tag"></span></span>
                 </div>
-                <label class="col tag px-0 ms-2">
-                    <input type="checkbox" class="d-none">
-                    <span class="btn px-2 py-0 align-baseline">HTML</span>
-                </label>
-                <label class="col tag px-0 ms-2">
-                    <input type="checkbox" class="d-none">
-                    <span class="btn px-2 py-0 align-baseline">JS</span>
-                </label>
-                <label class="col tag px-0 ms-2">
-                    <input type="checkbox" class="d-none">
-                    <span class="btn px-2 py-0 align-baseline">CSS</span>
-                </label>
-                <label class="col tag px-0 ms-2">
-                    <input type="checkbox" class="d-none">
-                    <span class="btn px-2 py-0 align-baseline">PHP</span>
-                </label>
+                {% for tag in tags %}
+                    <label class="col tag px-0 ms-2">
+                        <input type="checkbox" class="d-none">
+                        <span class="btn px-2 py-0 align-baseline">{{ tag }}</span>
+                    </label>
+                {% endfor %}
             </div>
             <div class="row row-cols-1 row-cols-lg-3 g-4 px-6">
                 {% for post in posts %}
@@ -64,8 +54,10 @@
             </div>
             {% endfor %}
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="text-center mt-4">
             <a class="btn btn-primary" href="{{ path('post_new') }}">Create new</a>
         </div>
+        {% endif %}
     </section>
 {% endblock %}

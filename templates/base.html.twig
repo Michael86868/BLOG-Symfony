@@ -52,6 +52,16 @@
         </div>
     </div>
 </nav>
+<div class="col-xl-6 mx-auto">
+    {% for label, messages in app.flashes(['success', 'error', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
 {% block body %}{% endblock %}
 
 {% block javascripts %}
