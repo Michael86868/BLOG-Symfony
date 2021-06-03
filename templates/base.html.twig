@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     {% block stylesheets %}
 
+        <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
         <link rel="stylesheet" href="{{ asset('bootstrap/scss/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('fonts/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bootstrap/custom/main.css') }}">
@@ -26,6 +27,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li><a href="{{ path('post_index') }}" class="nav-link px-3 link-dark fw-bold">Články</a></li>
                 <li><a href="{{ path('user_index') }}" class="nav-link px-3 link-dark fw-bold">Uživatelé</a></li>
+                <li><a href="{{ path('weather_station') }}" class="nav-link px-3 link-dark fw-bold">Arduino</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('approval') }}" class="nav-link px-3 link-dark fw-bold">Administrace</a></li>
                 {% endif %}
