@@ -50,6 +50,8 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Nový uživatel byl vytvořen.');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -81,6 +83,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Uživatel byl upraven.');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -99,6 +103,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Uživatel byl odstraněn.');
         }
 
         return $this->redirectToRoute('user_index');

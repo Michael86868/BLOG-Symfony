@@ -56,7 +56,7 @@ class ApprovalController extends AbstractController
                 $post->getTags()->add($this->getDoctrine()->getManager()->getRepository(PostTags::class)->find($item));
             }
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Článek byl uložen.');
         }
 
         return $this->render('approval/approval.html.twig', [
