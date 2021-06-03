@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ *
  */
 class Post
 {
@@ -51,12 +52,12 @@ class Post
     private string $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity=PostTags::class, inversedBy="posts")
+     * @ORM\ManyToMany(targetEntity=PostTags::class, inversedBy="posts", cascade={"persist", "remove"})
      */
     private Collection $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostComments::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=PostComments::class, mappedBy="post", cascade={"persist", "remove"})
      */
     private Collection $postComments;
 
