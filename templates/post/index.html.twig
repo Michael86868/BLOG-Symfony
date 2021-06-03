@@ -27,7 +27,7 @@
                             {% if is_granted('ROLE_ADMIN') %}
                                 {{ include('post/_delete_form.html.twig') }}
                             {% endif %}
-                            {% if app.user.id == post.author.id or is_granted('ROLE_ADMIN') %}
+                            {% if app.user.id|default(0) == post.author.id or is_granted('ROLE_ADMIN') %}
                                 <a class="position-absolute ms-5" href="{{ path('post_edit', {'id': post.id}) }}"><span class="fa fa-edit text-primary"></span></a>
                             {% endif %}
                             <div class="position-absolute bottom-0 end-0 mb-2 me-2 card-tag">
