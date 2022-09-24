@@ -14,7 +14,7 @@
                 </div>
                 {% for tag in tags %}
                     <label class="col tag px-0 ms-2">
-                        <input type="checkbox" class="d-none">
+                        <input type="checkbox" class="d-none" data-tags="{{ tag }}">
                         <span class="btn px-2 py-0 align-baseline">{{ tag }}</span>
                     </label>
                 {% endfor %}
@@ -22,7 +22,7 @@
             <div class="row row-cols-1 row-cols-lg-3 g-4 pe-0">
                 {% for post in posts %}
                 <div class="col">
-                    <div class="card h-100 shadow">
+                    <div class="card h-100 shadow" data-tags="{% for tag in post.getTags %}{{ loop.index == 1 ? tag.name : ',' ~ tag.name }}{% endfor %}">
                         <div class="card-img position-relative">
                             {% if is_granted('ROLE_ADMIN') %}
                                 {{ include('post/_delete_form.html.twig') }}
@@ -64,4 +64,35 @@
         </div>
         {% endif %}
     </section>
+    <script>
+        checkboxes = document.querySelectorAll("input[type=checkbox]");
+        cards = document.querySelectorAll("div.card");
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('click', () => {
+                let checked = 0;
+                cards.forEach(card => {
+                    card.classList.add("d-none");
+                })
+                for(const x of checkboxes){
+                    if(x.checked){
+                        checked++;
+                        cards.forEach(card => {
+                            let tags = card.getAttribute("data-tags").split(",");
+                            tags.forEach(tag => {
+                                if(tag === x.getAttribute("data-tags")){
+                                    card.classList.remove("d-none")
+                                }
+                            })
+                        })
+                    }
+                }
+                if(checked === 0){
+                    cards.forEach(card => {
+                        card.classList.remove("d-none");
+                    })
+                }
+            })
+        })
+    </script>
 {% endblock %}
